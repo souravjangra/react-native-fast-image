@@ -1,17 +1,8 @@
 import React, { forwardRef, memo } from 'react'
 import {
-    View,
-    Image,
-    NativeModules,
-    requireNativeComponent,
-    StyleSheet,
-    FlexStyle,
-    LayoutChangeEvent,
-    ShadowStyleIOS,
-    StyleProp,
-    TransformsStyle,
-    AccessibilityProps,
-    ViewProps,
+    AccessibilityProps, FlexStyle, Image, LayoutChangeEvent, NativeModules,
+    requireNativeComponent, ShadowStyleIOS,
+    StyleProp, StyleSheet, TransformsStyle, View, ViewProps
 } from 'react-native'
 
 const FastImageViewNativeModule = NativeModules.FastImageView
@@ -204,6 +195,7 @@ export interface FastImageStaticProperties {
     priority: typeof priority
     cacheControl: typeof cacheControl
     preload: (sources: Source[]) => void
+    enableDiskCaching: () => void
     clearMemoryCache: () => Promise<void>
     clearDiskCache: () => Promise<void>
 }
@@ -219,6 +211,9 @@ FastImage.priority = priority
 
 FastImage.preload = (sources: Source[]) =>
     FastImageViewNativeModule.preload(sources)
+
+FastImage.enableDiskCaching = () =>
+    FastImageViewNativeModule.enableDiskCaching()
 
 FastImage.clearMemoryCache = () => FastImageViewNativeModule.clearMemoryCache()
 
